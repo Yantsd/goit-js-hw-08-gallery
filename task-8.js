@@ -1,14 +1,15 @@
 import galleryItem from "/gallery-items.js";
 
-const galleryList = document.querySelector('.js-gallery');
-const lightbox = document.querySelector('.lightbox');
-const btn = document.querySelector('[data-action="close-lightbox"]');
-const overlay = document.querySelector('.lightbox__overlay');
+const refs = {
+    galleryList: document.querySelector('.js-gallery'),
+    lightbox: document.querySelector('.lightbox'),
+    btn: document.querySelector('[data-action="close-lightbox"]'),
+    overlay: document.querySelector('.lightbox__overlay')
+}
 
 const galleryMarkup = createGalleryMarkup(galleryItem);
 
-galleryList.insertAdjacentHTML('beforeend', galleryMarkup);
-
+refs.galleryList.insertAdjacentHTML('beforeend', galleryMarkup);
 
 function createGalleryMarkup (galleryItem) {
     return galleryItem
@@ -34,10 +35,10 @@ function createGalleryMarkup (galleryItem) {
     console.log(markup);
 }
 
-galleryList.addEventListener('click', onGalleryListClick);
-btn.addEventListener('click', onCloseBtnClick);
+refs.galleryList.addEventListener('click', onGalleryListClick);
+refs.btn.addEventListener('click', onCloseBtnClick);
 window.addEventListener('keydown', onCloseBtnClick);
-overlay.addEventListener('click', onCloseBtnClick);
+refs.overlay.addEventListener('click', onCloseBtnClick);
 
 function onGalleryListClick(event) {
     if(!event.target.classList.contains('gallery__image')) {
@@ -45,16 +46,16 @@ function onGalleryListClick(event) {
     } 
     event.preventDefault();
     if (event.target.nodeName === 'IMG') {
-        lightbox.classList.add('is-open');
-        lightbox.querySelector('.lightbox__image').src = event.target.dataset.source;
-        lightbox.querySelector('.lightbox__image').alt = event.target.alt;
+        refs.lightbox.classList.add('is-open');
+        refs.lightbox.querySelector('.lightbox__image').src = event.target.dataset.source;
+        refs.lightbox.querySelector('.lightbox__image').alt = event.target.alt;
     }
 }
 
 function onCloseBtnClick(event) {
     if(event.target.nodeName === 'BUTTON' || event.key === 'Escape' || 
     event.type === 'click') {
-        lightbox.classList.remove('is-open');
+        refs.lightbox.classList.remove('is-open');
     }
 }
 
