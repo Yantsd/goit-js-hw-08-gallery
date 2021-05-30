@@ -53,14 +53,15 @@ function onGalleryListClick(event) {
 }
 
 function onCloseBtnClick(event) {
-    if(event.target.nodeName === 'BUTTON' || event.key === 'Escape' || 
+    if(event.target.nodeName === 'BUTTON' || event.code === 'Escape' || 
     event.type === 'click') {
         refs.lightbox.classList.remove('is-open');
+        refs.lightbox.querySelector('.lightbox__image').setAttribute('src', '');
     }
 }
 
-const image = document.querySelector('.lightbox__image');
-console.log(image.setAttribute('src', '')); 
+// const image = document.querySelector('.lightbox__image');
+// console.log(image.setAttribute('src', ''));
 
 // document.getElementByClass('lightbox__image').removeAttribute('src');
 
